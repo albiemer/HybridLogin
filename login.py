@@ -3,7 +3,13 @@
 2. This is assigning for @route function
 3. This is a secret key
 4. mypos() function are the first function to initialize program to login form
+5. The loginconfirmfunc() function are the function to validate and to confirm the
+    entry record if existed in database
+6. The exitloginfunc() is a function to exit from the program.
+7. The start_server() is the function to start server in multi thread program  
 """
+
+
 import webview
 import threading
 from flask import Flask, redirect, url_for, request, render_template, make_response, session, escape, abort
@@ -25,6 +31,7 @@ posapp.secret_key = 'd08c92d50ae43bde171697297e3c9b11fcfdb90cb2f9ac24cd0ce9e69af
 def mypos():
     return render_template('Logintopos.html', myipaddress = myip.fullip(), note = login_note.note)
 
+#5
 @posapp.route('/loginconfirm', methods = ['POST', 'GET'])
 def loginconfirmfunc():
     if request.method == 'POST':
@@ -35,11 +42,13 @@ def loginconfirmfunc():
             return render_template('show-ab.html', a = a, b = b)
         except:
             return render_template('Logintopos.html', myipaddress = myip.fullip(), note = login_note.note, note1 = login_note.loginfail())
- 
+
+#6
 @posapp.route('/exitlogin', methods = ['POST'])
 def exitloginfunc():
     window.destroy()
- 
+
+#7
 def start_server():
     posapp.run(myip.ip, myip.port)
 

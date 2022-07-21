@@ -1,5 +1,5 @@
 """
-1. This is the port that i preferably assinged
+
 2. This is assigning for @route function
 3. This is a secret key
 4. mypos() function are the first function to initialize program to login form
@@ -17,8 +17,6 @@ from ipconfig import myip
 from note import login_note
 from sqlquery import loginquery
 
-#1
-port = 5000
 
 #2
 posapp = Flask(__name__)
@@ -38,8 +36,8 @@ def loginconfirmfunc():
         myuser = request.form['u_ser']
         mypass = request.form['p_ass']
         try:
-            a, b = loginquery(myuser, mypass)
-            return render_template('show-ab.html', a = a, b = b)
+            userlog = loginquery(myuser, mypass)
+            return render_template('show-ab.html', a = userlog[0], b = userlog[1])
         except:
             return render_template('Logintopos.html', myipaddress = myip.fullip(), note = login_note.note, note1 = login_note.loginfail())
 
@@ -57,7 +55,7 @@ if __name__ == '__main__':
     t.daemon = True
     t.start()
     # This line is to launch program in hybrid platform
-    window = webview.create_window("adeguin", 'http://192.168.1.2:5000/mypos', fullscreen=True, frameless=False)
+    window = webview.create_window("adeguin", 'http://'+myip.fullip()+'/mypos', fullscreen=True, frameless=False)
     webview.start(mypos, window)
     print(myip.fullip())
     

@@ -16,7 +16,7 @@ from flask import Flask, redirect, url_for, request, render_template, make_respo
 from ipconfig import myip
 from note import login_note
 from sqlquery import loginquery
-
+import module
 
 #2
 posapp = Flask(__name__)
@@ -41,7 +41,7 @@ def loginconfirmfunc():
                 return render_template('show-ab.html', a = userlog[3], b = userlog[5])
         
         else:
-            return render_template('Logintopos.html', myipaddress = myip.fullip(), note = login_note.note, note1 = login_note.loginfail())
+            return render_template(module.mymodule.login, myipaddress = myip.fullip(), note = login_note.note, note1 = login_note.loginfail())
 
 #6
 @posapp.route('/exitlogin', methods = ['POST'])

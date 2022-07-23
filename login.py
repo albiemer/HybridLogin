@@ -49,13 +49,16 @@ def exitloginfunc():
     window.destroy()
 
 #7
-def start_server():
+def server():
     posapp.run(myip.ip, myip.port)
-
-if __name__ == '__main__':
-    t = threading.Thread(target=start_server)
+    
+def runserver():
+    t = threading.Thread(target=server)
     t.daemon = True
     t.start()
+    
+if __name__ == '__main__':
+    runserver()
     # This line is to launch program in hybrid platform
     window = webview.create_window("adeguin", 'http://'+myip.fullip()+'/mypos', fullscreen=True, frameless=False)
     webview.start(mypos, window)

@@ -2,4 +2,4 @@
 class mymodule:
     login = 'Logintopos.html'
     
-print(mymodule.login)
+#print(mymodule.login)

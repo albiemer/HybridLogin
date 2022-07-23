@@ -35,10 +35,12 @@ def loginconfirmfunc():
     if request.method == 'POST':
         myuser = request.form['u_ser']
         mypass = request.form['p_ass']
-        try:
-            userlog = loginquery(myuser, mypass)
-            return render_template('show-ab.html', a = userlog[0], b = userlog[1])
-        except:
+        userlog = loginquery(myuser, mypass)
+        if(userlog):
+            if userlog[3] == myuser and userlog[5] == mypass:
+                return render_template('show-ab.html', a = userlog[3], b = userlog[5])
+        
+        else:
             return render_template('Logintopos.html', myipaddress = myip.fullip(), note = login_note.note, note1 = login_note.loginfail())
 
 #6
